@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: licensingservice
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+#Setting logging levels
+logging:
+  level:
+    com.netflix: WARN
+    org.springframework.web: WARN
+    com.diego: DEBUG
+
+
