@@ -7,13 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.diego.microdemo.licenses.clients.OrganizationRestTemplateClient;
+import com.diego.microdemo.licenses.config.ServiceConfig;
 import com.diego.microdemo.licenses.model.License;
 import com.diego.microdemo.licenses.model.Organization;
 import com.diego.microdemo.licenses.repository.LicenseRepository;
 
 @Service
 public class LicenseService {
-
+	
+	@Autowired
+	ServiceConfig config;
+	
 	@Autowired
 	private LicenseRepository licenseRepository;
 
@@ -26,7 +30,7 @@ public class LicenseService {
 		Organization org = getOrganization(organizationId);
 		return license.withOrganizationName(org.getName()).withContactName(org.getContactName())
 				.withContactEmail(org.getContactEmail()).withContactPhone(org.getContactPhone())
-				.withComment("comentario");
+				.withComment(config.getExampleProperty());
 	}
 
 	private Organization getOrganization(String organizationId) {

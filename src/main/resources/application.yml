@@ -11,5 +11,8 @@ logging:
     com.netflix: WARN
     org.springframework.web: WARN
     com.diego: DEBUG
-
+example:
+  property: comentarios!
+signing:
+  key: 1234
 
