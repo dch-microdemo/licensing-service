@@ -3,7 +3,6 @@ package com.diego.microdemo.licenses.services;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.diego.microdemo.licenses.clients.OrganizationRestTemplateClient;
@@ -12,17 +11,29 @@ import com.diego.microdemo.licenses.model.License;
 import com.diego.microdemo.licenses.model.Organization;
 import com.diego.microdemo.licenses.repository.LicenseRepository;
 
+/**
+ * @author Diego Chavez
+ *
+ */
 @Service
 public class LicenseService {
-	
-	@Autowired
-	ServiceConfig config;
-	
-	@Autowired
-	private LicenseRepository licenseRepository;
+	private final ServiceConfig config;
 
-	@Autowired
-	OrganizationRestTemplateClient organizationRestClient;
+	private final LicenseRepository licenseRepository;
+
+	private final OrganizationRestTemplateClient organizationRestClient;
+
+	/**
+	 * @param config
+	 * @param licenseRepository
+	 * @param organizationRestClient
+	 */
+	public LicenseService(ServiceConfig config, LicenseRepository licenseRepository,
+			OrganizationRestTemplateClient organizationRestClient) {
+		this.config = config;
+		this.licenseRepository = licenseRepository;
+		this.organizationRestClient = organizationRestClient;
+	}
 
 	public License getLicense(String organizationId, String licenseId) {
 		License license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);

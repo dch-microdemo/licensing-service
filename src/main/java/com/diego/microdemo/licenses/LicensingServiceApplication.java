@@ -12,6 +12,10 @@ import org.springframework.web.client.RestTemplate;
 
 import com.diego.microdemo.licenses.utils.UserContextInterceptor;
 
+/**
+ * @author Diego Chavez
+ *
+ */
 @SpringBootApplication
 @EnableResourceServer
 public class LicensingServiceApplication {

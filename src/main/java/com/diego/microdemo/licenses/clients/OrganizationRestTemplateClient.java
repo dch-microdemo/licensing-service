@@ -2,7 +2,6 @@ package com.diego.microdemo.licenses.clients;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -10,10 +9,18 @@ import org.springframework.web.client.RestTemplate;
 
 import com.diego.microdemo.licenses.model.Organization;
 
+/**
+ * @author Diego Chavez
+ *
+ */
 @Component
 public class OrganizationRestTemplateClient {
-	@Autowired
-	RestTemplate restTemplate;
+	
+	final private RestTemplate restTemplate;
+
+	public OrganizationRestTemplateClient(RestTemplate restTemplate) {
+		this.restTemplate = restTemplate;
+	}
 
 	private static final Logger logger = LoggerFactory.getLogger(OrganizationRestTemplateClient.class);
 

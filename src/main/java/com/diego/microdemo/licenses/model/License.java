@@ -8,6 +8,10 @@ import javax.persistence.Transient;
 
 import lombok.Data;
 
+/**
+ * @author Diego Chavez
+ *
+ */
 @Data
 @Entity
 @Table(name = "licenses")

@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 import lombok.Data;
 
+/**
+ * @author Diego Chavez
+ *
+ */
 @Data
 public class Organization implements Serializable {
 

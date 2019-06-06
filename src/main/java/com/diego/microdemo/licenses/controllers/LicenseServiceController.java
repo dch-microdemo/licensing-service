@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,14 +17,26 @@ import org.springframework.web.bind.annotation.RestController;
 import com.diego.microdemo.licenses.model.License;
 import com.diego.microdemo.licenses.services.LicenseService;
 
+/**
+ * @author Diego Chavez
+ *
+ */
 @RestController
 @RequestMapping(value = "v1/organizations/{organizationId}/licenses")
 public class LicenseServiceController {
-	@Autowired
-	private LicenseService licenseService;
 
-	@Autowired
-	private HttpServletRequest request;
+	private final LicenseService licenseService;
+
+	private final HttpServletRequest request;
+
+	/**
+	 * @param licenseService
+	 * @param request
+	 */
+	public LicenseServiceController(LicenseService licenseService, HttpServletRequest request) {
+		this.licenseService = licenseService;
+		this.request = request;
+	}
 
 	private static final Logger logger = LoggerFactory.getLogger(LicenseServiceController.class);
 
