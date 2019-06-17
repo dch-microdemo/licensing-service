@@ -4,7 +4,15 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-
+  kafka:    
+    consumer:
+      bootstrap-servers: localhost:9092
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer        
+      properties:        spring:
+          json:
+            trusted:
+              packages : com.diego.microdemo.organization.events.model
 #Setting logging levels
 logging:
   level:
