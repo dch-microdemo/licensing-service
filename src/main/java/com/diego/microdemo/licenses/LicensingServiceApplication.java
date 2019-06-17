@@ -3,13 +3,17 @@ package com.diego.microdemo.licenses;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.client.RestTemplate;
 
+import com.diego.microdemo.licenses.config.ServiceConfig;
 import com.diego.microdemo.licenses.utils.UserContextInterceptor;
 
 /**
@@ -19,6 +23,8 @@ import com.diego.microdemo.licenses.utils.UserContextInterceptor;
 @SpringBootApplication
 @EnableResourceServer
 public class LicensingServiceApplication {
+	@Autowired
+	private ServiceConfig serviceConfig;
 
 	@Bean
 	public RestTemplate getCustomRestTemplate() {
@@ -30,6 +36,21 @@ public class LicensingServiceApplication {
 			interceptors.add(new UserContextInterceptor());
 			template.setInterceptors(interceptors);
 		}
+		return template;
+	}
+
+	@Bean
+	JedisConnectionFactory jedisConnectionFactory() {
+		JedisConnectionFactory jedisConFactory = new JedisConnectionFactory();
+		jedisConFactory.setHostName(serviceConfig.getRedisServer());
+		jedisConFactory.setPort(serviceConfig.getRedisPort());
+		return jedisConFactory;
+	}
+
+	@Bean
+	public RedisTemplate<String, Object> redisTemplate() {
+		RedisTemplate<String, Object> template = new RedisTemplate<>();
+		template.setConnectionFactory(jedisConnectionFactory());
 		return template;
 	}
 
