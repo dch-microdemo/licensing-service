@@ -3,6 +3,7 @@ package com.diego.microdemo.licenses.events.services;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import com.diego.microdemo.licenses.repository.OrganizationRedisRepository;
 import com.diego.microdemo.organization.events.model.OrganizationChangeModel;
 
 import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.cloud.stream.messaging.Sink;
 
 @Service
 public class Consumer {
@@ -17,7 +19,8 @@ public class Consumer {
 	@Autowired
 	private OrganizationRedisRepository organizationRedisRepository;
 
-	@KafkaListener(topics = "orgChangeTopic", groupId = "licensingGroup")
+	//@KafkaListener(topics = "orgChangeTopic", groupId = "licensingGroup")
+	@StreamListener(Sink.INPUT)
 	public void receiveOrgChange(@Payload OrganizationChangeModel orgChange) {
 		logger.info(String.format("$$ -> Consumed Message with Action -> %s", orgChange.getAction()));
 		logger.debug("Received a message of type " + orgChange.getType());

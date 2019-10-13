@@ -1,18 +1,29 @@
 spring:
   application:
     name: licensingservice
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: orgChangeTopic
+          content-type: application/json
+          group: licensingGroup
+      kafka:
+        binder:
+          brokers: localhost
   jpa:
     hibernate:
       ddl-auto: none
-  kafka:    
-    consumer:
-      bootstrap-servers: localhost:9092
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer        
-      properties:        spring:
-          json:
-            trusted:
-              packages : com.diego.microdemo.organization.events.model
+#  kafka:    
+#    consumer:
+#      bootstrap-servers: localhost:9092
+#      auto-offset-reset: earliest
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer#      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer        
+#      properties:#        spring:
+#          json:
+#            trusted:
+#              packages : com.diego.microdemo.organization.events.model
+
 #Setting logging levels
 logging:
   level:
@@ -24,11 +35,11 @@ example:
 signing:
   key: 1234
 redis:
-  server: 192.168.99.100
+  server: 192.168.99.101
   port: 6379  
 opentracing:
   jaeger:
     udp-sender:
-      host: 192.168.99.100
+      host: 192.168.99.101
       port: 6831
 

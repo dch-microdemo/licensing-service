@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -22,6 +24,7 @@ import com.diego.microdemo.licenses.utils.UserContextInterceptor;
  */
 @SpringBootApplication
 @EnableResourceServer
+@EnableBinding(Sink.class)
 public class LicensingServiceApplication {
 	@Autowired
 	private ServiceConfig serviceConfig;
