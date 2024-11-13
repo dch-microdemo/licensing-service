@@ -8,7 +8,7 @@ import org.springframework.data.redis.core.RedisHash;
  * @author Diego Chavez
  *
  */
-@RedisHash("Student")
+@RedisHash("Organization")
 public class Organization implements Serializable {
 
 	private static final long serialVersionUID = 1L;
